@@ -15,6 +15,8 @@
 add_action( 'admin_init', 'theme_options_init' );
 add_action( 'admin_menu', 'theme_options_add_page' );
 
+include 'custom_posttype.php';
+
 // Register settings (http://codex.wordpress.org/Function_Reference/register_setting)
 function theme_options_init(){
 	register_setting( 'mam_options', 'mam_theme_options', 'mam_validate_options' );
