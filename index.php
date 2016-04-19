@@ -59,8 +59,46 @@
 			<br>
 
 			<div id="porfolioProjects">
+                <?php
+			$params = ['post_type' => 'portfolio', 'posts_per_page' => 4,
+                        'orderby' => 'ID', 'order' => 'ASC' ];
+			$myPosts = new WP_Query($params);
+            echo sizeof($myPosts);
+			while( $myPosts->have_posts()) :
+				$myPosts->the_post();
+                $counter = 1;
+                ?>
+
+				<figure name="UI DESIGN" class="portfolioFigure">
+					<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio01.jpg" alt="">
+					<figcaption>
+						<h5>UI DESIGN</h5>
+						<a data-toggle="modal" href="#id01">Take a Look</a>
+					</figcaption>
+				</figure>
 				
+				<div id="id01" class="modal">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<header class="container">
+								<a  href="#l"class="closebtn">×</a>
+								<h2 class="popup-h2">UI Design</h2>
+							</header>
+							<div class="container">
+								<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio01.jpg" alt="" class="image-popup">
+								<p>hallo Markus <?php echo $counter . " / " . sizeof($myPosts); $counter = $counter + 1; ?></p>
+                                <p><?php the_content(); ?></p>
+							</div>
+						</div>
+					</div>
+				</div>
+            <?php
+			endwhile;
+		?>
+
+
 				 <!-- PORTFOLIO IMAGE 1 -->
+                 <!--
 				<figure name="UI DESIGN" class="portfolioFigure">
 					<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio01.jpg" alt="">
 					<figcaption>
@@ -83,8 +121,10 @@
 						</div>
 					</div>
 				</div>
+                -->
 					
 				<!-- PORTFOLIO IMAGE 2 -->
+                <!--
 				<figure name="UI DESIGN" class="portfolioFigure">
 					<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio02.jpg" alt="">
 					<figcaption>
@@ -107,8 +147,10 @@
 						</div>
 					</div>
 				</div>
+                -->
 
 				<!-- PORTFOLIO IMAGE 3 -->
+                <!--
 				<figure name="ANDROID PAGE" class="portfolioFigure">
 					<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio03.jpg" alt="">
 					<figcaption>
@@ -131,8 +173,9 @@
 						</div>
 					</div>
 				</div>
-				
+				-->
 				<!-- PORTFOLIO IMAGE 4 -->
+                <!--
 				<figure name="ANDROID PAGE" class="portfolioFigure">
 					<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio04.jpg" alt="">
 					<figcaption>
@@ -155,8 +198,10 @@
 						</div>
 					</div>
 				</div>
+                -->
 				
 				<!-- PORTFOLIO IMAGE 5 -->
+                <!--
 				<figure name="ANDROID PAGE" class="portfolioFigure">
 					<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio05.jpg" alt="">
 					<figcaption>
@@ -179,8 +224,10 @@
 						</div>
 					</div>
 				</div>
+                -->
 
-				<!-- PORTFOLIO IMAGE 6 -->            
+				<!-- PORTFOLIO IMAGE 6 -->  
+                <!--          
 				<figure name="ANDROID PAGE" class="portfolioFigure">
 					<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio06.jpg" alt="">
 					<figcaption>
@@ -204,6 +251,7 @@
 						</div>
 					</div>
 				</div>
+                -->
 					
 			</div>
 			<br>
