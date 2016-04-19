@@ -6,8 +6,13 @@
 // http://blog.teamtreehouse.com/create-your-first-wordpress-custom-post-type
 
 
-add_theme_support( 'post-thumbnails', array('post', 'custom-type'));        // add theme support only for post's
-
+/*
+function custom_theme_support() {
+    add_theme_support( 'post-thumbnails', array('post', 'portfolio'));        // add theme support only for post's
+}
+add_action('init', 'custom_theme_support');
+*/
+add_theme_support('post-thumbnails', ['post', 'portfolio']);
 
 if (! function_exists("create_portfolio_post_type")) :
     function create_portfolio_post_type() {

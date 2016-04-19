@@ -20,23 +20,19 @@
 		<section id="technicalskills">
 			<h1 class="h1centered animate"> My Technical Skills</h1>
 			<div id="barhtml" class="bar">
-				<!--<div class="charttextupper">95<span>%</span></div>-->
-				<div class="charttextupper"><?php echo get_theme_mod( 'html_percentage', '0' ); ?><span>%</span></div> 
+				<div class="charttextupper">95<span>%</span></div>
 				<div class="charttextlower">HTML</div>
 			</div>
 			<div id="barcss" class="bar">
-				<!--<div class="charttextupper">80<span>%</span></div>-->
-				<div class="charttextupper"><?php echo get_theme_mod( 'css_percentage', '0' ); ?><span>%</span></div>
+				<div class="charttextupper">80<span>%</span></div>
 				<div class="charttextlower">CSS</div>
 			</div>
 			<div id="barjs" class="bar">
-				<!--<div class="charttextupper">90<span>%</span></div>-->
-				<div class="charttextupper"><?php echo get_theme_mod( 'js_percentage', '0' ); ?><span>%</span></div>
+				<div class="charttextupper">90<span>%</span></div>
 				<div class="charttextlower">JavaScript</div>
 			</div>
 			<div id="barwp" class="bar">
-				<!--<div class="charttextupper">80<span>%</span></div>-->
-				<div class="charttextupper"><?php echo get_theme_mod( 'wp_percentage', '0' ); ?><span>%</span></div>
+				<div class="charttextupper">80<span>%</span></div>
 				<div class="charttextlower">WordPress</div>
 			</div>
 		</section>
@@ -68,20 +64,20 @@
                         'orderby' => 'ID', 'order' => 'ASC' ];
 			$myPosts = new WP_Query($params);
             echo sizeof($myPosts);
-            $counter = 1;
 			while( $myPosts->have_posts()) :
 				$myPosts->the_post();
+                $counter = 1;
                 ?>
 
 				<figure name="UI DESIGN" class="portfolioFigure">
 					<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio01.jpg" alt="">
 					<figcaption>
 						<h5>UI DESIGN</h5>
-						<a data-toggle="modal" href="#id<?php echo $counter; ?>">Take a Look</a>  
+						<a data-toggle="modal" href="#id01">Take a Look</a>
 					</figcaption>
 				</figure>
 				
-				<div id="id<?php echo $counter; ?>" class="modal">
+				<div id="id01" class="modal">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<header class="container">
@@ -90,14 +86,13 @@
 							</header>
 							<div class="container">
 								<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio01.jpg" alt="" class="image-popup">
-								<p>hallo Markus <?php echo $counter . " / " . sizeof($myPosts);  ?></p>
+								<p>hallo Markus <?php echo $counter . " / " . sizeof($myPosts); $counter = $counter + 1; ?></p>
                                 <p><?php the_content(); ?></p>
 							</div>
 						</div>
 					</div>
 				</div>
-                <?php
-                $counter = $counter + 1;
+            <?php
 			endwhile;
 		?>
 
