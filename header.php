@@ -10,6 +10,7 @@
 	<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/menu.js"></script>
 	<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/animation.js"></script>
 	<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/portfolio.js"></script>
+    <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/ajax.js"></script>
 	<?php wp_head();?>
 </head>
 

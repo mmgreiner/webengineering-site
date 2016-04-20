@@ -75,8 +75,10 @@ function portfolio_metabox() {
     $custom = get_post_custom($post->ID);
     $project_name = $custom['project_name'][0];
     $port_type = $custom['port_type'][0];
+    /*
     $thumbnail = $custom['thumbnail'][0];
     $description = $custom['description'][0]; 
+    */
 ?>
     
     <div class='portfolio'>
@@ -86,12 +88,14 @@ function portfolio_metabox() {
         <p> <label>Portfolio Type<br><input type="text" name ="port_type" size="50"
             value="<?php echo $port_type; ?>"> </label>
         </p>
+        <!--
         <p> <label>Thumbnail<br><input type="text" name ="thumbnail" size="50"
             value="<?php echo $thumbnail; ?>"> </label>
         </p>
         <p> <label>Description<br><input type="text" name ="description" size="50"
             value="<?php echo $description; ?>"> </label>
         </p>
+        -->
 <?php
 }
 
