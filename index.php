@@ -11,7 +11,7 @@
 $params = array('post_type' => 'page', post_name__in => array('About', 'Part Designer', 'Part Coder'), 'orderby' => 'order', 'order' => 'ASC');
 $myPosts = new WP_Query($params);
 while ($myPosts->have_posts()): $myPosts->the_post();
-the_content();
+    the_content();
 endwhile;
 ?>
 
@@ -52,34 +52,43 @@ endwhile;
             <section name="ALL" class="portfolioCat animate" id="portfolioSelected" onclick="toggleVisiblePortfolioProjects(this)">
                 <p>ALL</p>
             </section>
+            <?php 
+            $cats = get_portfolio_categories();
+            foreach ($cats as $cat) {
+                ?>
+            <section name="<?php echo $cat; ?>" class="portfolioCat animate" onclick="toggleVisiblePortfolioProjects(this)">
+                <p><?php echo $cat; ?></p>
+            </section>
+            <?php    
+            }
+            ?>
+            <!-- 
             <section name="UI DESIGN" class="portfolioCat animate" onclick="toggleVisiblePortfolioProjects(this)">
                 <p> UI DESIGN </p>
             </section>
             <section name="ANDROID PAGE" class="portfolioCat animate" onclick="toggleVisiblePortfolioProjects(this)">
                 <p> ANDROID PAGE </p>
             </section>
+            -->
         </nav>
         <br>
 
-        <div id="porfolioProjects">
+        <div id="portfolioProjects">
         <?php 
         $params = array('post_type' => 'portfolio', 'posts_per_page' => 6, 'orderby' => 'ID', 'order' => 'ASC');
         $portfolioPosts = new WP_Query($params);
         
-        // for testing
-        while ($portfolioPosts->have_posts()) {
-            $portfolioPosts->the_post();
-            echo '<pa>' . get_the_title() . '</pa><br>';
-        }
-        
-        //$portfolioPosts = new WP_Query('post_type=portfolio');
         $counter = 1;
-        while ($portfolioPosts->have_posts()) : $portfolioPosts->the_post(); ?>
-            <figure name="UI DESIGN" class="portfolioFigure">
-                <img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio01.jpg" alt="">
+        while ($portfolioPosts->have_posts()) : $portfolioPosts->the_post(); 
+            $category = the_portfolio_category(get_the_ID());
+        ?>
+<!--            <figure name="UI DESIGN" class="portfolioFigure"> -->
+            <figure class="portfolioFigure" name="<?php echo $category;?>">
+                <?php echo get_the_post_thumbnail();?>
+                <!-- <img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio01.jpg" alt=""> -->
                 <figcaption>
-                    <h5>UI DESIGN <?php echo get_the_title(); ?></h5>
-                    <a data-toggle="modal" href="#id<?php echo $counter; ?>">Take a Look <?php echo the_title(); ?> </a>
+                    <h5><?php echo $category;?></h5>
+                    <a data-toggle="modal" href="#id<?php echo $counter; ?>">Take a Look</a>
                 </figcaption>
             </figure>
             
@@ -88,12 +97,11 @@ endwhile;
                     <div class="modal-content">
                         <header class="container">
                             <a href="#l" class="closebtn">×</a>
-                            <h2 class="popup-h2">UI Design</h2>
+                            <h2 class="popup-h2"><?php the_title(); echo ' / ' . $category?></h2>
                         </header>
                         <div class="container">
-                            
-                            <img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio01.jpg" alt="" class="image-popup">
-                            <p>hallo Markus <?php echo $counter; ?></p>
+                            <?php echo get_the_post_thumbnail(get_the_ID() /*, [600, 400] ['class' => 'image-popup']*/);?> 
+                            <!-- <img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio01.jpg" alt="" class="image-popup"> -->
                             <p><?php the_content(); ?></p>
                         </div>
                     </div>
@@ -103,164 +111,6 @@ endwhile;
         $counter = $counter + 1;
         endwhile;
         ?>
-
-
-            <!-- PORTFOLIO IMAGE 1 -->
-            <!--
-				<figure name="UI DESIGN" class="portfolioFigure">
-					<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio01.jpg" alt="">
-					<figcaption>
-						<h5>UI DESIGN</h5>
-						<a data-toggle="modal" href="#id01">Take a Look</a>
-					</figcaption>
-				</figure>
-				
-				<div id="id01" class="modal">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<header class="container">
-								<a  href="#l"class="closebtn">×</a>
-								<h2 class="popup-h2">UI Design</h2>
-							</header>
-							<div class="container">
-								<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio01.jpg" alt="" class="image-popup">
-								<p>The quality of a user interface relies on a easily understandable operation concept, adapted to the user’s workflow. Nevertheless, it is the optimization of visual design and dynamic elements that create an extraordinary user experience..</p>
-							</div>
-						</div>
-					</div>
-				</div>
-                -->
-
-            <!-- PORTFOLIO IMAGE 2 -->
-            <!--
-				<figure name="UI DESIGN" class="portfolioFigure">
-					<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio02.jpg" alt="">
-					<figcaption>
-						<h5>UI DESIGN</h5>
-						<a data-toggle="modal" href="#id02">Take a Look</a>
-					</figcaption>
-				</figure>
-				
-				<div id="id02" class="modal">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<header class="container">
-								<a  href="#l"class="closebtn">×</a>
-								<h2 class="popup-h2">UI Design</h2>
-							</header>
-							<div class="container">
-								<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio02.jpg"alt="" class="image-popup">
-								<p>The quality of a user interface relies on a easily understandable operation concept, adapted to the user’s workflow. Nevertheless, it is the optimization of visual design and dynamic elements that create an extraordinary user experience..</p>
-							</div>                        
-						</div>
-					</div>
-				</div>
-                -->
-
-            <!-- PORTFOLIO IMAGE 3 -->
-            <!--
-				<figure name="ANDROID PAGE" class="portfolioFigure">
-					<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio03.jpg" alt="">
-					<figcaption>
-						<h5>ANDROID PAGE</h5>
-						<a data-toggle="modal" href="#id03">Take a Look</a>
-					</figcaption>
-				</figure>
-				
-				<div id="id03" class="modal">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<header class="container">
-								<a  href="#l"class="closebtn">×</a>
-								<h2 class="popup-h2">ANDROID PAGE</h2>
-							</header>
-							<div class="container">
-								<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio03.jpg" alt="" class="image-popup">
-								<p>The quality of a user interface relies on a easily understandable operation concept, adapted to the user’s workflow. Nevertheless, it is the optimization of visual design and dynamic elements that create an extraordinary user experience..</p>
-							</div>            
-						</div>
-					</div>
-				</div>
-				-->
-            <!-- PORTFOLIO IMAGE 4 -->
-            <!--
-				<figure name="ANDROID PAGE" class="portfolioFigure">
-					<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio04.jpg" alt="">
-					<figcaption>
-						<h5>ANDROID PAGE</h5>
-						<a data-toggle="modal" href="#id04">Take a Look</a>
-					</figcaption>
-				</figure>
-				
-				<div id="id04" class="modal">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<header class="container">
-								<a  href="#l"class="closebtn">×</a>
-								<h2 class="popup-h2">ANDROID PAGE</h2>
-							</header>
-							<div class="container">
-								<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio04.jpg" class="image-popup">
-								<p>The quality of a user interface relies on a easily understandable operation concept, adapted to the user’s workflow. Nevertheless, it is the optimization of visual design and dynamic elements that create an extraordinary user experience..</p>
-							</div>            
-						</div>
-					</div>
-				</div>
-                -->
-
-            <!-- PORTFOLIO IMAGE 5 -->
-            <!--
-				<figure name="ANDROID PAGE" class="portfolioFigure">
-					<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio05.jpg" alt="">
-					<figcaption>
-						<h5>ANDROID PAGE</h5>
-						<a data-toggle="modal" href="#id05">Take a Look</a>
-					</figcaption>
-				</figure>
-				
-				<div id="id05" class="modal">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<header class="container">
-								<a  href="#l"class="closebtn">×</a>
-								<h2 class="popup-h2">ANDROID PAGE</h2>
-							</header>
-							<div class="container">
-								<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio05.jpg" alt="" class="image-popup">
-									<p>The quality of a user interface relies on a easily understandable operation concept, adapted to the user’s workflow. Nevertheless, it is the optimization of visual design and dynamic elements that create an extraordinary user experience..</p>
-							</div>
-						</div>
-					</div>
-				</div>
-                -->
-
-            <!-- PORTFOLIO IMAGE 6 -->
-            <!--          
-				<figure name="ANDROID PAGE" class="portfolioFigure">
-					<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio06.jpg" alt="">
-					<figcaption>
-						<h5>ANDROID PAGE</h5>
-						<a data-toggle="modal" href="#id06">Take a Look</a>
-					</figcaption>
-				</figure>
-				
-				<div id="id06" class="modal">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<header class="container">
-								<a  href="#l"class="closebtn">×</a>
-								<h2 class="popup-h2">ANDROID PAGE</h2>
-							</header>
-							<div class="container">
-								<img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio06.jpg" alt="" class="image-popup">
-									<p>The quality of a user interface relies on a easily understandable operation concept, adapted to the user’s workflow. Nevertheless, it is the optimization of visual design and dynamic elements that create an extraordinary user experience..</p>
-									</div>
-							
-						</div>
-					</div>
-				</div>
-                -->
-
         </div>
         <br>
         <br>

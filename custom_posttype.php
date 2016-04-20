@@ -6,12 +6,9 @@
 // http://blog.teamtreehouse.com/create-your-first-wordpress-custom-post-type
 
 
-/*
-function custom_theme_support() {
-    add_theme_support( 'post-thumbnails', array('post', 'portfolio'));        // add theme support only for post's
-}
-add_action('init', 'custom_theme_support');
-*/
+
+// https://codex.wordpress.org/Function_Reference/add_theme_support
+
 add_theme_support('post-thumbnails', ['post', 'portfolio']);
 
 if (! function_exists("create_portfolio_post_type")) :
@@ -127,7 +124,39 @@ function portfolio_post_save_meta ($post_id, $post) {
 
 add_action('save_post', 'portfolio_post_save_meta', 1, 2);     // priority, nof args
 
-/////////////////////
+// taken from: https://developer.wordpress.org/reference/functions/get_the_terms/
 
+function the_portfolio_category( $id = false ) {
+    $terms = get_the_terms(get_the_ID(), 'custom_category');
+    if ( $terms && ! is_wp_error($terms)) {
+        $cats = [];
+        foreach ($terms as $term) {
+            $cats[] = $term->name;
+        }
+        $catstr = join(',', $cats );
+        //echo '<p>T: ' . $catstr . '</p>';
+        return $catstr;
+    }
+    return '';
+} 
+
+function get_portfolio_categories($asString = false) {
+    $categories = get_categories( [
+        'taxonomy' => 'custom_category',
+    ]);
+    $res = [];
+    if ($categories && ! is_wp_error($categories)) {
+        foreach ($categories as $cat) {
+            $res[] = $cat->name;
+        }
+        //$catstr = join(',', $res);
+    }
+    if ($asString) {
+        return join(',', $res);
+    }
+    else {
+        return $res;
+    }
+}
 
 ?>
