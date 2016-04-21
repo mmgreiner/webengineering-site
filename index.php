@@ -100,7 +100,7 @@ endwhile;
                             <h2 class="popup-h2"><?php the_title(); echo ' / ' . $category?></h2>
                         </header>
                         <div class="container">
-                            <?php echo get_the_post_thumbnail(get_the_ID() /*, [600, 400] ['class' => 'image-popup']*/);?> 
+                            <?php echo get_the_post_thumbnail(get_the_ID(), [300, 400] /*['class' => 'image-popup']*/);?> 
                             <!-- <img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio01.jpg" alt="" class="image-popup"> -->
                             <p><?php the_content(); ?></p>
                         </div>
